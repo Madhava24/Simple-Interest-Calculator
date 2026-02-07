@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 // import { use } from "react";
 // import { calculateNewValue } from '@testing-library/user-event/dist/utils';
 
@@ -14,7 +14,6 @@ const App = () => {
   const [endDate, setEndDate] = useState(
     new Date().toISOString().split("T")[0]
   ); // Default to current date
-  const [showResult, setShowResult] = useState(false); // Controls result visibility
 
   // State for error messages
   const [principalError, setPrincipalError] = useState("");
@@ -22,52 +21,52 @@ const App = () => {
   const [dateError, setDateError] = useState("");
 
   /**
-   * Handles the calculation of simple interest on form submission.
-   * Performs validation, calculates time, and updates the interest state.
-   * @param {Event} e - The form submission event.
+   * Validates all input fields for simple interest calculation.
+   * @returns {boolean} True if all inputs are valid, false otherwise.
    */
-  function validateInputs() {
-    // let isValid = true;
+  const validateInputs = useCallback(() => {
+    let isValid = true;
 
     // Validate Principal
     if (isNaN(parseFloat(principal)) || parseFloat(principal) <= 0) {
-      // setPrincipalError('Principal must be a positive number.');
-      // isValid = false;
-      return false;
+      setPrincipalError('Principal must be a positive number.');
+      isValid = false;
+    } else {
+      setPrincipalError('');
     }
 
     // Validate Rate
     if (isNaN(parseFloat(rate)) || parseFloat(rate) <= 0) {
-      // setRateError('Rate must be a positive number.');
-      // isValid = false;
-      return false;
+      setRateError('Rate must be a positive number.');
+      isValid = false;
+    } else {
+      setRateError('');
     }
-    if (!startDate || !endDate) {
-      return false;
-    }
+
     // Validate Dates
-    const start = new Date(startDate);
-    const end = new Date(endDate);
-    if (start > end) {
-      setDateError("End date cannot be before start date.");
-      // isValid = false;
-      return false;
+    if (!startDate || !endDate) {
+      isValid = false;
+    } else {
+      const start = new Date(startDate);
+      const end = new Date(endDate);
+      if (start > end) {
+        setDateError("End date cannot be before start date.");
+        isValid = false;
+      } else {
+        setDateError("");
+      }
     }
-    setDateError("");
-    return true;
-  }
+    return isValid;
+  }, [principal, rate, startDate, endDate, setPrincipalError, setRateError, setDateError]);
 
   React.useEffect(() => {
-    // When all inputs are correct, enable showResult
-    setShowResult(validateInputs());
+    validateInputs();
   }, [
     principal,
     rate,
     startDate,
     endDate,
-    principalError,
-    rateError,
-    dateError,
+    validateInputs,
   ]);
 
   const formatDateRange = (diff) => {
