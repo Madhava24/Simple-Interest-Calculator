@@ -253,18 +253,6 @@ const App = () => {
                 ).toFixed(2);
               }
             }
-            // let simpleInterest = "-";
-            // let simpleInterestPerMonth = "-";
-            // let totalAmount = "-";
-            // if (showResult) {
-            //   start = new Date(startDate);
-            //   end = new Date(endDate);
-            //   diff = getYMDifference(start, end);
-            //   const resp = calculateSimpleInterest(diff);
-            //   simpleInterest = resp.simpleInterest;
-            //   simpleInterestPerMonth = resp.simpleInterestPerMonth.toFixed(2);
-            //   totalAmount = (parseFloat(principal) + parseFloat(simpleInterest)).toFixed(2);
-            // }
             return (
               <>
                 <p className="text-5xl font-extrabold text-indigo-700 tracking-wider min-h-[3.5rem] flex items-center justify-center drop-shadow-lg">
