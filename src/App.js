@@ -120,19 +120,19 @@ const App = () => {
   };
 
   return (
-    <div className="min-h-screen w-full bg-gradient-to-br from-indigo-600 via-purple-700 to-pink-600 flex flex-col items-center justify-center p-2 font-inter">
-      <h1 className="text-4xl font-extrabold text-center  mb-8 tracking-tight">
+    <div className="min-h-screen w-full bg-gradient-to-br from-indigo-600 via-purple-700 to-pink-600 flex flex-col items-center justify-start md:justify-center p-3 md:p-4 font-inter">
+      <h1 className="text-2xl md:text-4xl font-extrabold text-center mb-6 md:mb-8 tracking-tight text-white">
         Simple Interest Calculator
       </h1>
-      <div className="bg-white/90 p-4 md:p-8 rounded-2xl shadow-2xl w-full max-w-5xl max-h-[96vh] flex flex-col md:flex-row gap-8 transition-all duration-300">
+      <div className="bg-white/90 p-4 md:p-8 rounded-2xl shadow-2xl w-full max-w-5xl flex flex-col md:flex-row gap-6 md:gap-8 transition-all duration-300">
         {/* Left: Input Form */}
-        <div className="flex-1 flex flex-col justify-center bg-white/80 rounded-xl shadow-lg p-6 md:p-8 border border-gray-200">
+        <div className="flex-1 flex flex-col justify-center bg-white/80 rounded-xl shadow-lg p-4 md:p-8 border border-gray-200 w-full md:w-auto">
           <form className="space-y-6">
             {/* Principal Input */}
             <div>
               <label
                 htmlFor="principal"
-                className="block text-lg font-medium text-gray-700 mb-2"
+                className="block text-sm md:text-lg font-medium text-gray-700 mb-2"
               >
                 Principal Amount (₹)
               </label>
@@ -141,7 +141,7 @@ const App = () => {
                 id="principal"
                 value={principal}
                 onChange={(e) => setPrincipal(e.target.value)}
-                className={`w-full p-3 border-2 ${
+                className={`w-full p-2 md:p-3 border-2 text-sm md:text-base ${
                   principalError ? "border-red-500" : "border-gray-300"
                 } rounded-lg focus:ring-indigo-500 focus:border-indigo-500 transition duration-200 ease-in-out shadow-sm bg-white`}
                 placeholder="e.g., 10000"
@@ -149,25 +149,23 @@ const App = () => {
                 min="0"
                 step="any"
               />
-              {principalError && (
-                <p className="mt-2 text-sm text-red-600">{principalError}</p>
-              )}
+              <p className="mt-2 text-sm text-red-600 min-h-[1.5rem]">{principalError}</p>
             </div>
             {/* Rate of Interest Input */}
             <div>
               <label
                 htmlFor="rate"
-                className="block text-lg font-medium text-gray-700 mb-2"
+                className="block text-sm md:text-lg font-medium text-gray-700 mb-2"
               >
                 Rate of Interest (%)
               </label>
-              <div className="flex items-center space-x-3">
+              <div className="flex flex-col md:flex-row items-stretch md:items-center gap-2 md:gap-3">
                 <input
                   type="number"
                   id="rate"
                   value={rate}
                   onChange={(e) => setRate(e.target.value)}
-                  className={`flex-grow p-3 border-2 ${
+                  className={`flex-grow p-2 md:p-3 border-2 text-sm md:text-base ${
                     rateError ? "border-red-500" : "border-gray-300"
                   } rounded-lg focus:ring-indigo-500 focus:border-indigo-500 transition duration-200 ease-in-out shadow-sm bg-white`}
                   placeholder="e.g., 5"
@@ -179,21 +177,19 @@ const App = () => {
                   id="rateUnit"
                   value={rateUnit}
                   onChange={(e) => setRateUnit(e.target.value)}
-                  className="p-3 border-2 border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 transition duration-200 ease-in-out shadow-sm bg-white cursor-pointer"
+                  className="p-2 md:p-3 border-2 border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 transition duration-200 ease-in-out shadow-sm bg-white cursor-pointer text-sm md:text-base whitespace-nowrap"
                 >
                   <option value="per_annum">Per Annum</option>
                   <option value="per_month">Per Month</option>
                 </select>
               </div>
-              {rateError && (
-                <p className="mt-2 text-sm text-red-600">{rateError}</p>
-              )}
+              <p className="mt-2 text-sm text-red-600 min-h-[1.5rem]">{rateError}</p>
             </div>
             {/* Start Date Input */}
             <div>
               <label
                 htmlFor="startDate"
-                className="block text-lg font-medium text-gray-700 mb-2"
+                className="block text-sm md:text-lg font-medium text-gray-700 mb-2"
               >
                 Start Date
               </label>
@@ -202,7 +198,7 @@ const App = () => {
                 id="startDate"
                 value={startDate}
                 onChange={(e) => setStartDate(e.target.value)}
-                className="w-full p-3 border-2 border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 transition duration-200 ease-in-out shadow-sm bg-white"
+                className="w-full p-2 md:p-3 border-2 border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 transition duration-200 ease-in-out shadow-sm bg-white text-sm md:text-base"
                 required
               />
             </div>
@@ -210,7 +206,7 @@ const App = () => {
             <div>
               <label
                 htmlFor="endDate"
-                className="block text-lg font-medium text-gray-700 mb-2"
+                className="block text-sm md:text-lg font-medium text-gray-700 mb-2"
               >
                 End Date
               </label>
@@ -219,18 +215,16 @@ const App = () => {
                 id="endDate"
                 value={endDate}
                 onChange={(e) => setEndDate(e.target.value)}
-                className="w-full p-3 border-2 border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 transition duration-200 ease-in-out shadow-sm bg-white"
+                className="w-full p-2 md:p-3 border-2 border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 transition duration-200 ease-in-out shadow-sm bg-white text-sm md:text-base"
                 required
               />
-              {dateError && (
-                <p className="mt-2 text-sm text-red-600">{dateError}</p>
-              )}
+              <p className="mt-2 text-sm text-red-600 min-h-[1.5rem]">{dateError}</p>
             </div>
           </form>
         </div>
         {/* Right: Result Display (always visible, reserved space) */}
-        <div className="flex-1 flex flex-col justify-start items-center min-h-[350px] border-t-2 md:border-t-0 md:border-l-2 border-gray-200 pt-8 md:pt-0 md:pl-8 transition-all duration-300 bg-gradient-to-br from-purple-100 via-indigo-100 to-pink-100 rounded-xl shadow-lg">
-          <h2 className="text-2xl font-semibold text-indigo-800 mb-4 mt-8">
+        <div className="flex-1 flex flex-col justify-start items-center min-h-auto md:min-h-[350px] border-t-2 md:border-t-0 md:border-l-2 border-gray-200 pt-6 md:pt-0 md:pl-8 pb-6 md:pb-0 transition-all duration-300 bg-gradient-to-br from-purple-100 via-indigo-100 to-pink-100 rounded-xl shadow-lg w-full md:w-auto">
+          <h2 className="text-lg md:text-2xl font-semibold text-indigo-800 mb-4 mt-4 md:mt-8 text-center">
             Calculated Simple Interest
           </h2>
           {/* Additional Details */}
@@ -254,15 +248,15 @@ const App = () => {
             }
             return (
               <>
-                <p className="text-5xl font-extrabold text-indigo-700 tracking-wider min-h-[3.5rem] flex items-center justify-center drop-shadow-lg">
+                <p className="text-3xl md:text-5xl font-extrabold text-indigo-700 tracking-wider min-h-[2.5rem] md:min-h-[3.5rem] flex items-center justify-center drop-shadow-lg">
                   <span className="bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
                     ₹{simpleInterest}
                   </span>
                 </p>
-                <div className="mt-8 w-full max-w-md bg-white/80 rounded-lg shadow p-4 text-gray-700 space-y-2 text-base mt-10">
+                <div className="mt-6 md:mt-8 w-full max-w-md bg-white/80 rounded-lg shadow p-3 md:p-4 text-gray-700 space-y-2 text-sm md:text-base">
                   <div className="flex justify-between">
                     <span className="font-medium">Duration:</span>
-                    <span>{formatDateRange(diff)}</span>
+                    <span className="text-right">{formatDateRange(diff)}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="font-medium">Total Interest:</span>
