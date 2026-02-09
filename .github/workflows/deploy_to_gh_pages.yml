@@ -19,6 +19,8 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install and Build
+        env:
+          PUBLIC_URL: /Simple-Interest-Calculator
         run: |
           npm install
           npm run build
